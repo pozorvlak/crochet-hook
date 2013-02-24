@@ -5,10 +5,13 @@ length_above_grip = 50;  // measured from the centre-point of the grip
 length_below_grip = 100; // measured from the centre-point of the grip
 length = length_above_grip + length_below_grip;
 hook_lower_angle = 80;
-hook_upper_angle = 30;
+hook_upper_angle = 40;
 grip_length = 20;
 grip_slope=5;
 grip_depth=d/5;
+narrowing_length = 10;
+narrowing_slope = 20;
+narrowing_depth = d/4;
 
 // Right-angled triangle with interior angle <angle>.
 module triangle(radius, angle)
@@ -40,6 +43,11 @@ module grip()
 	trapezium_prism(grip_depth, grip_length, grip_slope, d);
 }
 
+module narrowing()
+{
+	trapezium_prism(narrowing_depth, narrowing_length, narrowing_slope, d);
+}
+
 rotate(a=[90, 0, 0])
         difference()
         {
@@ -63,4 +71,11 @@ rotate(a=[90, 0, 0])
 		translate([0, -r, 0])
 			rotate(a=[0, 90, 0])
 				grip();
+		// Narrow the head, for Greater Pointiness
+		translate(v=[r, 0, length_above_grip])
+			rotate(a=[-90, 90, 0])
+				narrowing();
+		translate(v=[-r, 0, length_above_grip])
+			rotate(a=[-90, 90, 180])
+				narrowing();
         }
