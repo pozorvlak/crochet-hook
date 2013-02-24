@@ -18,9 +18,6 @@ module triangle_prism(height, radius, angle)
   linear_extrude(height=height, center = true) triangle(radius, angle);
 }
 
-smallradius = r;
-largeradius = smallradius * Cphi; 
-
 difference()
 {
 	union()
