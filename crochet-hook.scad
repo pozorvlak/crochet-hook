@@ -1,8 +1,8 @@
 hooksize = 6.1;
 d = hooksize;
 r = hooksize/2;
-length_above_grip = hooksize * 7.5;   // measured from the centre-point of the grip
-length_below_grip = hooksize * 12; // measured from the centre-point of the grip
+length_above_grip = 50;  // measured from the centre-point of the grip
+length_below_grip = 100; // measured from the centre-point of the grip
 length = length_above_grip + length_below_grip;
 hook_lower_angle = 80;
 hook_upper_angle = 30;
