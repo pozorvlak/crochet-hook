@@ -2,6 +2,8 @@ hooksize = 6.1;
 d = hooksize;
 r = hooksize/2;
 h = hooksize * 15;
+hook_lower_angle = 80;
+hook_upper_angle = 30;
 
 // Right-angled triangle with interior angle <angle>.
 module triangle(radius, angle)
@@ -30,7 +32,7 @@ difference()
 	translate (v= [0 , -r/4, h/2])
 		rotate(a=[270, 0, 90])
 			difference() {
-				triangle_prism(d, 4*d, 80);
-				triangle_prism(d, 4*d, 30);
+				triangle_prism(d, 4*d, hook_lower_angle);
+				triangle_prism(d, 4*d, hook_upper_angle);
 			}
 }
