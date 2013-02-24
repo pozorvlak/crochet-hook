@@ -26,7 +26,9 @@ difference()
 {
 	union()
 	{
-		translate (v=[0,0,h/2]) sphere(r = r, anglesteps = 10, sweepsteps = 10);
+		translate (v=[0,0,h/2])
+			scale([1.0, 1.0, 2.0])
+				sphere(r = r, anglesteps = 10, sweepsteps = 10);
 		cylinder(r = r, h = h, center = true);
 	}
 	translate (v= [0 , r*1.6 ,h/2-d]) rotate(a=[cutout_angle,0,0]) rotate(a=[0,90,0]) triangle_prism(d, d*1.2);
