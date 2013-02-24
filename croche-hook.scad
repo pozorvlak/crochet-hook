@@ -20,19 +20,20 @@ module triangle_prism(height, radius, angle)
   linear_extrude(height=height, center = true) triangle(radius, angle);
 }
 
-difference()
-{
-	union()
-	{
-		translate (v=[0,0,h/2])
-			scale([1.0, 1.0, 2.0])
-				sphere(r = r, anglesteps = 10, sweepsteps = 10);
-		cylinder(r = r, h = h, center = true);
-	}
-	translate (v= [0 , -r/4, h/2])
-		rotate(a=[270, 0, 90])
-			difference() {
-				triangle_prism(d, 4*d, hook_lower_angle);
-				triangle_prism(d, 4*d, hook_upper_angle);
-			}
-}
+rotate(a=[90, 0, 0])
+        difference()
+        {
+                union()
+                {
+                        translate (v=[0,0,h/2])
+                                scale([1.0, 1.0, 2.0])
+                                sphere(r = r, anglesteps = 10, sweepsteps = 10);
+                        cylinder(r = r, h = h, center = true);
+                }
+                translate (v= [0 , -r/4, h/2])
+                        rotate(a=[270, 0, 90])
+                        difference() {
+                                triangle_prism(d, 4*d, hook_lower_angle);
+                                triangle_prism(d, 4*d, hook_upper_angle);
+                        }
+        }
