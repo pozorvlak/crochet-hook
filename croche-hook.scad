@@ -3,9 +3,7 @@ d = hooksize;
 r = hooksize/2;
 h = hooksize * 15;
 
-// module triangle() & module triangle_prism() copied from:
-// https://github.com/elmom/MCAD/blob/master/regular_shapes.scad
-// 
+// Right-angled triangle with interior angle <angle>.
 module triangle(radius, angle)
 {
   o=radius*sin(angle);
@@ -13,6 +11,8 @@ module triangle(radius, angle)
   polygon(points=[[0,0], [a,0], [a,o]]);
 }
 
+// module triangle_prism() copied from:
+// https://github.com/elmom/MCAD/blob/master/regular_shapes.scad
 module triangle_prism(height, radius, angle)
 {
   linear_extrude(height=height, center = true) triangle(radius, angle);
