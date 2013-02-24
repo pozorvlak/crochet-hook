@@ -15,7 +15,7 @@ module triangle(radius)
 
 module triangle_prism(height,radius)
 {
-  linear_extrude(height=height, center = true) triangle(radius, center = true);
+  linear_extrude(height=height, center = true) triangle(radius);
 }
 
 smallradius = r;
