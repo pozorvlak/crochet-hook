@@ -95,18 +95,25 @@ module throat()
 
 module hook()
 {
-        translate(v=[0, r/2, length_above_grip - hook_length])
-                cylinder(h=hook_length, r1=0, r2=r - narrowing_depth, center=false);
+        intersection() {
+                outer_shell();
+                translate(v=[0, r, length_above_grip - hook_length])
+                        cylinder(h=hook_length, r1=0, r2=r, center=false);
+        }
 }
 
 rotate(a=[90, 0, 0]) {
-        difference()
-        {
-                outer_shell();
-                throat();
-                grip();
+        difference() {
+                union() {
+                        difference()
+                        {
+                                outer_shell();
+                                throat();
+                                grip();
+                        }
+                        hook();
+                }
 		// Narrow the head, for Greater Pointiness
                 narrowing();
         }
-        hook();
 }
