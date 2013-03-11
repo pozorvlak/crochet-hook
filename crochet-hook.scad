@@ -58,7 +58,7 @@ rotate(a=[90, 0, 0]) {
                                 scale([1.0, 1.0, 2.0])
                                 sphere(r = r, anglesteps = 10, sweepsteps = 10);
                         translate (v=[0, 0, -length_below_grip])
-                                cylinder(r = r, h = length);
+                                cylinder(r = r, h = length, $fn=30);
                 }
                 translate (v= [0 , -r/4, length_above_grip])
                         rotate(a=[270, 0, 90])
