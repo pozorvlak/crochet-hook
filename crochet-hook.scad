@@ -1,4 +1,4 @@
-hooksize = 6.1;
+hooksize = 8.1;
 d = hooksize;
 r = hooksize/2;
 length_above_grip = 50;  // measured from the centre-point of the grip
