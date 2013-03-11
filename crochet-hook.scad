@@ -12,7 +12,7 @@ grip_slope=5;
 grip_depth=d/5;
 narrowing_length = 10;
 narrowing_slope = 20;
-narrowing_depth = d/4;
+narrowing_depth = d/6;
 
 $fn = 30;
 
