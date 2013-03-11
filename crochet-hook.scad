@@ -41,47 +41,72 @@ module trapezium_prism(trap_height, flat_width, slope_width, height)
                     [max_x, 0]]);
 }
 
-module grip()
+module grip_side()
 {
 	trapezium_prism(grip_depth, grip_length, grip_slope, d);
 }
 
-module narrowing()
+module grip()
+{
+        translate([0, r, 0])
+                rotate(a=[0, 90, 180])
+                        grip_side();
+        translate([0, -r, 0])
+                rotate(a=[0, 90, 0])
+                        grip_side();
+}
+
+module narrowing_side()
 {
 	trapezium_prism(narrowing_depth, narrowing_length, narrowing_slope, d);
+}
+
+module narrowing()
+{
+        translate(v=[r, 0, length_above_grip])
+                rotate(a=[-90, 90, 0])
+                        narrowing_side();
+        translate(v=[-r, 0, length_above_grip])
+                rotate(a=[-90, 90, 180])
+                        narrowing_side();
+}
+
+module outer_shell()
+{
+        union()
+        {
+                translate (v=[0, 0, length_above_grip])
+                        scale([1.0, 1.0, 2.0])
+                        sphere(r = r, anglesteps = 10, sweepsteps = 10);
+                translate (v=[0, 0, -length_below_grip])
+                        cylinder(r = r, h = length);
+        }
+}
+
+module throat()
+{
+        translate (v= [0 , -r/4, length_above_grip])
+                rotate(a=[270, 0, 90])
+                difference() {
+                        triangle_prism(d, 4*d, hook_lower_angle);
+                        triangle_prism(d, 4*d, hook_upper_angle);
+                }
+}
+
+module hook()
+{
+        translate(v=[0, r/2, length_above_grip - hook_length])
+                cylinder(h=hook_length, r1=0, r2=r - narrowing_depth, center=false);
 }
 
 rotate(a=[90, 0, 0]) {
         difference()
         {
-                union()
-                {
-                        translate (v=[0, 0, length_above_grip])
-                                scale([1.0, 1.0, 2.0])
-                                sphere(r = r, anglesteps = 10, sweepsteps = 10);
-                        translate (v=[0, 0, -length_below_grip])
-                                cylinder(r = r, h = length);
-                }
-                translate (v= [0 , -r/4, length_above_grip])
-                        rotate(a=[270, 0, 90])
-                        difference() {
-                                triangle_prism(d, 4*d, hook_lower_angle);
-                                triangle_prism(d, 4*d, hook_upper_angle);
-                        }
-		translate([0, r, 0])
-			rotate(a=[0, 90, 180])
-				grip();
-		translate([0, -r, 0])
-			rotate(a=[0, 90, 0])
-				grip();
+                outer_shell();
+                throat();
+                grip();
 		// Narrow the head, for Greater Pointiness
-		translate(v=[r, 0, length_above_grip])
-			rotate(a=[-90, 90, 0])
-				narrowing();
-		translate(v=[-r, 0, length_above_grip])
-			rotate(a=[-90, 90, 180])
-				narrowing();
+                narrowing();
         }
-	translate(v=[0, r/2, length_above_grip - hook_length])
-		cylinder(h=hook_length, r1=0, r2=r - narrowing_depth, center=false);
+        hook();
 }
