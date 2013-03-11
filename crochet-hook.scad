@@ -5,7 +5,8 @@ length_above_grip = 50;  // measured from the centre-point of the grip
 length_below_grip = 100; // measured from the centre-point of the grip
 length = length_above_grip + length_below_grip;
 hook_lower_angle = 80;
-hook_upper_angle = 40;
+hook_upper_angle =0;
+hook_length=4;
 grip_length = 20;
 grip_slope=5;
 grip_depth=d/5;
@@ -48,7 +49,7 @@ module narrowing()
 	trapezium_prism(narrowing_depth, narrowing_length, narrowing_slope, d);
 }
 
-rotate(a=[90, 0, 0])
+rotate(a=[90, 0, 0]) {
         difference()
         {
                 union()
@@ -79,3 +80,6 @@ rotate(a=[90, 0, 0])
 			rotate(a=[-90, 90, 180])
 				narrowing();
         }
+	translate(v=[0, r/2, length_above_grip - hook_length])
+		cylinder(h=hook_length, r1=0, r2=r - narrowing_depth, center=false, $fn=30);
+}
