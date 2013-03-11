@@ -14,6 +14,8 @@ narrowing_length = 10;
 narrowing_slope = 20;
 narrowing_depth = d/4;
 
+$fn = 30;
+
 // Right-angled triangle with interior angle <angle>.
 module triangle(radius, angle)
 {
@@ -58,7 +60,7 @@ rotate(a=[90, 0, 0]) {
                                 scale([1.0, 1.0, 2.0])
                                 sphere(r = r, anglesteps = 10, sweepsteps = 10);
                         translate (v=[0, 0, -length_below_grip])
-                                cylinder(r = r, h = length, $fn=30);
+                                cylinder(r = r, h = length);
                 }
                 translate (v= [0 , -r/4, length_above_grip])
                         rotate(a=[270, 0, 90])
@@ -81,5 +83,5 @@ rotate(a=[90, 0, 0]) {
 				narrowing();
         }
 	translate(v=[0, r/2, length_above_grip - hook_length])
-		cylinder(h=hook_length, r1=0, r2=r - narrowing_depth, center=false, $fn=30);
+		cylinder(h=hook_length, r1=0, r2=r - narrowing_depth, center=false);
 }
