@@ -1,18 +1,36 @@
-hooksize = 10;
-d = hooksize;
-r = hooksize/2;
-length_above_grip = 60;  // measured from the centre-point of the grip
-length_below_grip = 90; // measured from the centre-point of the grip
-length = length_above_grip + length_below_grip;
-hook_lower_angle = 80;
-hook_upper_angle =0;
-hook_length=5;
-grip_length = 20;
-grip_slope=5;
-grip_depth=d/5;
+/* [Overall size] */
+// The diameter of the hook
+diameter = 6; // [2.00:US - UK 14, 2.25:US 1/B UK 13, 2.50:US - UK 12, 2.75:US C UK 11, 3.00:US - UK 11, 3.25:US D UK 10, 3.50:US 4/E UK 9, 3.75:US F UK -, 4.00:US 6 UK 8, 4.25:US G UK -, 4.50:US 7 UK 7, 5.00:US 8/H UK 6, 5.50:US 9/I UK 5, 6.00:US 10/J UK 4, 6.50:US 10.5/K UK 3, 7.00:US - UK 2, 8.00:US - UK 0, 9.00:US 15/N UK 00, 10.00:US P UK 000, 16:US Q UK -]
+d = diameter;
+r = diameter/2;
+length = 150; // [30:300]
+/* [Hook and throat] */
+// How sharply the throat slopes down from the shaft (in degrees)
+throat_angle = 10;
+hook_lower_angle = 90 - throat_angle;
+// The length of the pointy curled-over bit
+hook_length = 5;
+// How long the narrowed section at the point is
 narrowing_length = 10;
+// How long the sloping section from shaft to narrowing is
 narrowing_slope = 20;
-narrowing_depth = d/6;
+// How much the throat narrows on each side, as a fraction of the diameter
+narrowing_ratio = 0.16;
+narrowing_depth = d * narrowing_ratio;
+// [Thumb rest]
+// The length of the thumb rest
+grip_length = 20;
+// How long the sloping sections from shaft and handle to thumb rest are
+grip_slope=5;
+// How thick the thumb rest is, as a fraction of the diameter
+grip_thickness = 0.6;
+grip_depth=d * (1 - grip_thickness)/2;
+// Distance from the centre-point of the thumb rest to the tip of the point
+length_above_grip = 60;
+// measured from the centre-point of the thumb rest to the end of the handle
+length_below_grip = length - length_above_grip;
+/* [Hidden] */
+hook_upper_angle = 0;
 
 $fn = 30;
 
